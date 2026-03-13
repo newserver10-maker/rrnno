@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDIORANO | 상품 상세</title>
+
+    <!-- Pretendard 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN (Cafe24 환경용) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { fontFamily: { sans: ["'Noto Sans KR'", "sans-serif"] } } }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans KR', sans-serif; }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- 헤더: index.html과 동일하게 복사 붙여넣기 -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="text-xl font-bold tracking-[0.2em] text-black uppercase">Studiorano</a>
+        <nav class="hidden md:flex items-center gap-10">
+            <a href="/" class="text-sm font-medium text-gray-600 hover:text-black tracking-wide transition">Shop</a>
+            <a href="/#products" class="text-sm font-medium text-gray-600 hover:text-black tracking-wide transition">Unique Eco-bag</a>
+            <a href="/#leather" class="text-sm font-medium text-gray-600 hover:text-black tracking-wide transition">Leather Bag</a>
+            <a href="/#about" class="text-sm font-medium text-gray-600 hover:text-black tracking-wide transition">About Us</a>
+        </nav>
+        <div class="flex items-center gap-4">
+            <!-- {$member_menu_link} -->
+            <!-- {$basket_icon_module} -->
+            <a href="#" title="장바구니" class="text-gray-600 hover:text-black transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m5-9v9m4-9v9m1-10V4a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- ================================================ -->
+<!-- 상품 상세 (product/detail.html) 메인 레이아웃    -->
+<!-- ================================================ -->
+<!--
+    [Cafe24 연동 핵심 주의사항]
+    이 파일은 Cafe24 스킨의 /product/detail.html 파일을 교체할 때 사용합니다.
+    
+    ★ 절대로 건드리면 안 되는 요소들 (Cafe24 결제 시스템 연동):
+        - 수량 INPUT: <input type="number" name="quantity" id="quantity" ...>
+        - 상품 코드: <input type="hidden" name="product_no" value="{$product_no}">
+        - 장바구니 폼: <form name="order_info" ...> 안에 있는 모든 input 요소
+        - 버튼의 onclick 함수: basket_put(), direct_order() 등
+-->
+<div class="w-full min-h-screen pt-28 pb-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- 뒤로가기 링크 -->
+        <a href="javascript:history.back()" class="mb-8 inline-flex text-sm text-gray-400 hover:text-black transition items-center gap-2">
+            <span>&#8592;</span> Back to Collection
+        </a>
+
+        <!--
+            [Cafe24 상품 상세 모듈 시작]
+            Cafe24 편집기에서 이 위치에 상품 상세 모듈을 드래그 앤 드롭하거나
+            아래 HTML을 product/detail.html의 실제 모듈 변수가 들어간 영역에 맞춰 수정하세요.
+        -->
+        <div class="flex flex-col md:flex-row gap-16">
+
+            <!-- [왼쪽] 상품 이미지 -->
+            <div class="w-full md:w-1/2">
+                <!--
+                    [Cafe24 변수 치환 필요]
+                    메인 이미지: {$main_img} 또는 <img module="mainImage" .../>
+                    추가 이미지 썸네일: {$additional_image_module}
+                -->
+                <img
+                    src="/assets/images/product_eco_bag_1_1773383860413.png"
+                    alt="단청 모티브 에코백"
+                    id="main_product_img"
+                    class="w-full h-auto object-cover rounded-sm border border-gray-100 shadow-sm"
+                />
+            </div>
+
+            <!-- [오른쪽] 상품 정보 및 주문 폼 -->
+            <div class="w-full md:w-1/2 flex flex-col justify-start">
+
+                <!-- 상품명 -->
+                <!-- [Cafe24 변수 치환 필요] {$product_name} -->
+                <h1 class="text-4xl font-semibold tracking-tight text-gray-900 mb-2">단청 모티브 에코백</h1>
+
+                <!-- 판매가 -->
+                <!-- [Cafe24 변수 치환 필요] {$product_price} -->
+                <p class="text-2xl font-light text-gray-600 mb-8 pb-8 border-b border-gray-200">45,000원</p>
+
+                <!-- 상품 요약설명 -->
+                <!-- [Cafe24 변수 치환 필요] {$simple_desc} -->
+                <p class="text-gray-500 leading-relaxed font-light mb-10">
+                    한국 전통의 색과 미를 살린 오리지널 에코백.<br><br>
+                    본 상품은 수작업으로 제작되어 한정된 수량만 판매됩니다. 일상생활 속 모든 스타일에 자연스럽게 스며듭니다.
+                </p>
+
+                <!--
+                    ============================================================
+                    [Cafe24 주문 폼 - 절대 id/name 속성 수정 금지!]
+                    이 form 태그는 Cafe24가 결제 처리에 사용하는 핵심 구조입니다.
+                    class 속성(디자인)만 추가/수정하고, id/name/value 속성은 절대 건드리지 마세요!
+                    ============================================================
+                -->
+                <form name="order_info" method="post">
+                    <!-- 상품번호 (숨김 필드, 절대 삭제 금지) -->
+                    <!-- <input type="hidden" name="product_no" value="{$product_no}"> -->
+                    <input type="hidden" name="product_no" value="DEMO_001"> <!-- 데모용 -->
+
+                    <!-- 색상 옵션 (Cafe24 옵션 모듈 자리) -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                        <!--
+                            [Cafe24 변수 치환 필요]
+                            실제 연동 시 아래 select 요소를 {$option_module}으로 교체하거나
+                            Cafe24 상품 옵션 설정에서 'Custom Select'를 활용하세요.
+                        -->
+                        <div class="flex flex-wrap gap-3" id="color-options">
+                            <button type="button" onclick="selectColor(this, 'Ivory')"
+                                class="color-btn px-4 py-2 text-sm border border-black bg-black text-white transition">Ivory</button>
+                            <button type="button" onclick="selectColor(this, 'Charcoal')"
+                                class="color-btn px-4 py-2 text-sm border border-gray-300 text-gray-600 hover:border-gray-500 transition">Charcoal</button>
+                        </div>
+                        <!-- 선택된 색상값 (Cafe24 옵션 연동 시 Cafe24의 기본 option select로 대체) -->
+                        <input type="hidden" name="selected_color" id="selected-color-input" value="Ivory">
+                    </div>
+
+                    <!-- 수량 조절 -->
+                    <div class="mb-10">
+                        <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
+                        <div class="flex items-center border border-gray-300 w-32 rounded-sm overflow-hidden">
+                            <button type="button" onclick="changeQty(-1)"
+                                class="px-4 py-2 text-gray-600 hover:bg-gray-100 transition select-none">-</button>
+                            <!--
+                                [Cafe24 핵심 연동 요소 - id, name 절대 수정 금지!]
+                                Cafe24의 모든 결제 처리는 이 id="quantity" 와 name="quantity" 속성을 기반으로 동작합니다.
+                            -->
+                            <input
+                                type="number"
+                                id="quantity"
+                                name="quantity"
+                                value="1"
+                                min="1"
+                                readonly
+                                class="flex-1 text-center text-sm font-medium py-2 border-0 bg-transparent focus:outline-none"
+                            />
+                            <button type="button" onclick="changeQty(1)"
+                                class="px-4 py-2 text-gray-600 hover:bg-gray-100 transition select-none">+</button>
+                        </div>
+                    </div>
+
+                    <!-- 최종 결제 금액 (JavaScript로 동적 계산) -->
+                    <div class="flex justify-between items-center bg-gray-50 p-6 rounded-sm mb-6">
+                        <span class="text-sm font-medium text-gray-700">Total Price</span>
+                        <span class="text-xl font-semibold text-gray-900" id="total-price-display">45,000원</span>
+                    </div>
+
+                    <!-- 장바구니 / 바로구매 버튼 -->
+                    <div class="flex gap-4 mb-4">
+                        <!--
+                            [Cafe24 변수 치환 필요]
+                            basket_put() 과 direct_order() 는 Cafe24 기본 제공 JavaScript 함수입니다.
+                            이 onclick을 절대 제거하지 마세요.
+                        -->
+                        <button type="button" onclick="basket_put()"
+                            class="flex-1 py-4 border border-black text-black font-medium hover:bg-gray-50 transition w-full">
+                            Add to Cart
+                        </button>
+                        <button type="button" onclick="direct_order()"
+                            class="flex-1 py-4 bg-black text-white font-medium hover:bg-gray-800 transition shadow-lg w-full">
+                            Buy It Now
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-400 text-center">전 상품 무료 배송 / 7일 이내 반품 가능</p>
+                </form>
+                <!-- // 주문 폼 끝 -->
+
+            </div>
+        </div>
+        <!-- // 상품 상세 모듈 끝 -->
+
+    </div>
+</div>
+
+<!-- 푸터: index.html과 동일하게 복사 붙여넣기 -->
+<footer class="bg-black text-white py-16">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-white/10">
+            <div>
+                <h3 class="text-lg font-bold tracking-widest mb-4 uppercase">STUDIORANO</h3>
+                <p class="text-sm text-gray-400 leading-relaxed font-light">한국의 고유한 아름다움을<br />현대적으로 재해석한 라이프스타일 브랜드.</p>
+            </div>
+            <div>
+                <h4 class="text-sm font-medium uppercase tracking-widest mb-4 text-white/60">Customer</h4>
+                <ul class="space-y-2 text-sm text-gray-400 font-light">
+                    <li><a href="#" class="hover:text-white transition">주문/배송 조회</a></li>
+                    <li><a href="#" class="hover:text-white transition">교환/반품 안내</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-medium uppercase tracking-widest mb-4 text-white/60">Brand</h4>
+                <ul class="space-y-2 text-sm text-gray-400 font-light">
+                    <li><a href="/#about" class="hover:text-white transition">Our Story</a></li>
+                    <li><a href="#" class="hover:text-white transition">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pt-8 text-xs text-gray-600 text-center">
+            © 2025 STUDIORANO. All Rights Reserved.
+            <!-- {$company_info_module} -->
+        </div>
+    </div>
+</footer>
+
+<script>
+    // [의도] 가격 기준값 (실제 연동 시 Cafe24에서 {$product_price}를 파싱하여 동적으로 세팅)
+    const BASE_PRICE = 45000;
+
+    // 수량 변경 함수
+    function changeQty(delta) {
+        const qtyInput = document.getElementById('quantity');
+        const currentQty = parseInt(qtyInput.value, 10);
+        const newQty = Math.max(1, currentQty + delta); // 최소 수량 1
+
+        qtyInput.value = newQty;
+        document.getElementById('total-price-display').textContent = (BASE_PRICE * newQty).toLocaleString('ko-KR') + '원';
+    }
+
+    // 색상 선택 함수
+    function selectColor(clickedBtn, colorName) {
+        // 모든 버튼 초기화
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.classList.remove('border-black', 'bg-black', 'text-white');
+            btn.classList.add('border-gray-300', 'text-gray-600');
+        });
+        // 선택된 버튼 스타일 활성화
+        clickedBtn.classList.add('border-black', 'bg-black', 'text-white');
+        clickedBtn.classList.remove('border-gray-300', 'text-gray-600');
+        // 숨김 input에 선택값 저장 (폼 제출에 활용)
+        document.getElementById('selected-color-input').value = colorName;
+    }
+
+    // Cafe24 결제 연동을 위한 안전 처리 (연동 전 오류 방지용 폴백)
+    // [Cafe24 연동 완료 후 이 두 줄은 삭제해야 합니다!]
+    function basket_put() { alert('[데모] 장바구니에 담겼습니다!\n실제 Cafe24 연동 후 이 기능이 작동합니다.'); }
+    function direct_order() { alert('[데모] 바로 구매 페이지로 이동합니다!\n실제 Cafe24 연동 후 이 기능이 작동합니다.'); }
+</script>
+
+</body>
+</html>
