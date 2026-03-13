@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studiorano - 한국의 유니크함을 현대적으로 재해석하다</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Pretendard -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+        }
+        /* Fade-in Animation */
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Soft Hover effect for products */
+        .product-card img {
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        /* HTML 마크업만으로 스무스 스크롤 구현 제한 시 보완 */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased overflow-x-hidden">
+
+    <!-- Navbar / GNB -->
+    <header class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <h1 class="text-2xl font-bold tracking-tighter">STUDIORANO</h1>
+            <nav>
+                <ul class="flex space-x-8 text-sm font-medium">
+                    <li><a href="#hero" class="hover:text-gray-500 transition">Shop</a></li>
+                    <li><a href="#products" class="hover:text-gray-500 transition">Unique Eco-bag</a></li>
+                    <!-- Phase 2: Leather Bag (Currently Hidden for Phase 1 via 'hidden' class) -->
+                    <li class="hidden"><a href="#leather" class="hover:text-gray-500 transition">Leather Bag</a></li>
+                    <li><a href="#about" class="hover:text-gray-500 transition">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative w-full h-screen flex items-center justify-start bg-gray-50">
+        <!-- Hero Background Image -->
+        <div class="absolute inset-0 w-full h-full overflow-hidden">
+            <img src="./assets/images/hero_bg_1773383845854.png" alt="Hero Background" class="w-full h-full object-cover object-center opacity-90">
+            <!-- Overlay for better text readability on top of images -->
+            <div class="absolute inset-0 bg-black/30"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full fade-in">
+            <p class="text-sm uppercase tracking-[0.3em] font-semibold text-white/80 mb-4">New Collection Launch</p>
+            <h2 class="text-5xl md:text-7xl font-bold text-white leading-tight mt-2 mb-6 tracking-tight drop-shadow-lg">
+                Modernity<br>in Tradition
+            </h2>
+            <p class="text-lg md:text-xl text-white/90 font-light max-w-md mb-10 leading-relaxed drop-shadow-md">
+                '한국의 유니크함'을 현대적으로 재해석한 가방 브랜드, 스튜디오라노의 첫 번째 컬렉션을 만나보세요.
+            </p>
+            <a href="#products" class="inline-block px-8 py-4 bg-white text-black text-sm font-medium tracking-wide hover:bg-gray-100 transition duration-300 shadow-md">
+                Explore Collection
+            </a>
+        </div>
+    </section>
+
+    <!-- Product Catalog (Phase-Driven Scale-up) -->
+    <section id="products" class="py-24 bg-white pb-32">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-end justify-between mb-16">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Unique Eco-bag</h2>
+                    <p class="text-gray-500 mt-4 font-light">전통 모티브의 디테일과 현대적인 실용성을 겸비한 디자인</p>
+                </div>
+            </div>
+
+            <!-- Product Grid (3 columns for Desktop, 2 for Tablet) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                
+                <!-- Product 1 -->
+                <div class="product-card group cursor-pointer">
+                    <div class="relative w-full aspect-[4/5] bg-gray-100 overflow-hidden rounded-sm">
+                        <!-- <!-- [Cafe24 변수] 상품 이미지 (예: <img src="{$product_custom_img1}" ... />) --> -->
+                        <img src="./assets/images/product_eco_bag_1_1773383860413.png" alt="단청 모티브 에코백" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="mt-6 text-center">
+                        <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">New</p>
+                        <!-- <!-- [Cafe24 변수] 상품명 (예: {$product_name}) --> -->
+                        <h3 class="text-lg font-medium text-gray-900 group-hover:text-gray-600 transition-colors">단청 모티브 에코백</h3>
+                        <!-- <!-- [Cafe24 변수] 상품 판매가 (예: {$product_price}) --> -->
+                        <p class="text-md text-gray-900 mt-2 font-light">45,000원</p>
+                        
+                        <!-- <!-- [Cafe24 변수] 장바구니 버튼 모듈 (예: {$product_basket_btn}) --> -->
+                        <button class="mt-4 px-6 py-2 border border-gray-300 text-sm hover:bg-black hover:text-white transition-colors duration-300 w-full lg:w-auto">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card group cursor-pointer">
+                    <div class="relative w-full aspect-[4/5] bg-gray-100 overflow-hidden rounded-sm">
+                        <!-- <!-- [Cafe24 변수] 상품 이미지 --> -->
+                        <img src="./assets/images/product_eco_bag_1_1773383860413.png" alt="한복 실루엣 에코백" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="mt-6 text-center">
+                        <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">Bestseller</p>
+                        <!-- <!-- [Cafe24 변수] 상품명 --> -->
+                        <h3 class="text-lg font-medium text-gray-900 group-hover:text-gray-600 transition-colors">한복 실루엣 에코백</h3>
+                        <!-- <!-- [Cafe24 변수] 상품 판매가 --> -->
+                        <p class="text-md text-gray-900 mt-2 font-light">48,000원</p>
+                        
+                        <!-- <!-- [Cafe24 변수] 장바구니 버튼 모듈 --> -->
+                        <button class="mt-4 px-6 py-2 border border-gray-300 text-sm hover:bg-black hover:text-white transition-colors duration-300 w-full lg:w-auto">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card group cursor-pointer">
+                    <div class="relative w-full aspect-[4/5] bg-gray-100 overflow-hidden rounded-sm">
+                        <!-- <!-- [Cafe24 변수] 상품 이미지 --> -->
+                        <img src="./assets/images/product_eco_bag_1_1773383860413.png" alt="전통 자수 에코백" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter grayscale-[20%]">
+                    </div>
+                    <div class="mt-6 text-center">
+                        <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">Limited</p>
+                        <!-- <!-- [Cafe24 변수] 상품명 --> -->
+                        <h3 class="text-lg font-medium text-gray-900 group-hover:text-gray-600 transition-colors">전통 자수 에코백</h3>
+                        <!-- <!-- [Cafe24 변수] 상품 판매가 --> -->
+                        <p class="text-md text-gray-900 mt-2 font-light">52,000원</p>
+                        
+                        <!-- <!-- [Cafe24 변수] 장바구니 버튼 모듈 --> -->
+                        <button class="mt-4 px-6 py-2 border border-gray-300 text-sm hover:bg-black hover:text-white transition-colors duration-300 w-full lg:w-auto">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story (About Us) -->
+    <section id="about" class="py-24 bg-gray-50 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-semibold tracking-tight text-center mb-24">Our Story</h2>
+            
+            <!-- Zigzag Block 1 -->
+            <div class="flex flex-col lg:flex-row items-center gap-16 mb-32">
+                <div class="w-full lg:w-1/2">
+                    <div class="aspect-square lg:aspect-video bg-gray-200 overflow-hidden rounded-sm shadow-sm">
+                        <img src="./assets/images/brand_story_texture_1773383877086.png" alt="Material Texture" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 lg:pl-10">
+                    <p class="text-sm uppercase tracking-widest text-gray-400 mb-4">Origin</p>
+                    <h3 class="text-3xl font-medium mb-6 leading-tight">가장 한국적인 것이<br>가장 현대적인 순간</h3>
+                    <p class="text-gray-600 leading-relaxed font-light">
+                        스튜디오라노는 전통적인 모티브를 현대적인 라이프스타일에 맞게 재해석합니다. 
+                        우리의 첫 번째 여정인 에코백은 일상 속에서 가볍게 들 수 있으면서도 
+                        고유한 디테일이 살아있는 캔버스입니다. 섬세한 질감과 여백의 미를 통해 
+                        시간이 지나도 변치 않는 가치를 전달합니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Zigzag Block 2 -->
+             <div class="flex flex-col lg:flex-row-reverse items-center gap-16">
+                <div class="w-full lg:w-1/2">
+                    <div class="aspect-square lg:aspect-video bg-gray-200 overflow-hidden rounded-sm shadow-sm">
+                        <img src="./assets/images/hero_bg_1773383845854.png" alt="Brand Direction" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 lg:pr-10 text-left lg:text-right">
+                    <p class="text-sm uppercase tracking-widest text-gray-400 mb-4">Vision</p>
+                    <h3 class="text-3xl font-medium mb-6 leading-tight">에코백에서 가죽으로,<br>확장되는 브랜딩</h3>
+                    <p class="text-gray-600 leading-relaxed font-light lg:ml-auto">
+                        자연스럽고 편안한 에코백에서 시작된 우리의 이야기는 
+                        곧 완성도 높은 가죽 가방으로 이어질 예정입니다. 
+                        확고한 취향을 지닌 분들을 위해, 스튜디오라노는 소재의 한계를 넘어 
+                        끝없이 진화하는 디자인 스펙트럼을 선보일 것입니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-16">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+            <h2 class="text-xl font-bold tracking-tighter mb-4">STUDIORANO</h2>
+            <p class="text-sm text-gray-400 font-light mb-8 max-w-sm">
+                '한국의 유니크함'을 현대적으로 재해석한 프리미엄 브랜드
+            </p>
+            <div class="flex space-x-6 mb-8 text-sm text-gray-500 font-light">
+                <a href="#" class="hover:text-gray-900 transition">이용약관</a>
+                <a href="#" class="hover:text-gray-900 transition">개인정보처리방침</a>
+                <a href="#" class="hover:text-gray-900 transition">고객센터</a>
+            </div>
+            <p class="text-xs text-gray-400">&copy; 2026 Studiorano. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* [의도] 브랜드 아이덴티티를 위한 폰트 설정 및 부드러운 스크롤 애니메이션 추가 */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+}
