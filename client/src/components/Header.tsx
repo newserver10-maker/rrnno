@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 // ==========================================
@@ -9,7 +8,8 @@ const Header = () => {
   const navItems = [
     { label: 'Shop', href: '/#hero', isVisible: true },
     { label: 'Unique Eco-bag', href: '/#products', isVisible: true },
-    { label: 'Leather Bag', href: '/#leather', isVisible: false },
+    // [의도] 2차 확장을 위해 설정해두었던 Leather Bag 메뉴를 활성화하여 화면에 표시함.
+    { label: 'Leather Bag', href: '/#leather', isVisible: true },
     { label: 'About Us', href: '/#about', isVisible: true },
   ];
 

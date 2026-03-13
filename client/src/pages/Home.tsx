@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
@@ -29,7 +28,7 @@ const Hero = () => {
   );
 };
 
-type ProductType = {
+export type ProductType = {
   id: string;
   badge: string;
   name: string;
@@ -39,14 +38,13 @@ type ProductType = {
 };
 
 // ==========================================
-// [의도] 사용자가 상품 카드 자체를 클릭하면 구매/상세 페이지로 넘어갈 수 있도록
-// onClick 이벤트 및 react-router-dom의 useNavigate를 적용하여 동적인 반응형 웹을 구현함.
+// [의도] 개별 상품 카드를 렌더링하는 UI 조각(Component)입니다.
+// 에코백, 가죽 가방 모두 동일한 UI 구조를 재사용할 수 있도록 독립된 함수로 분리했습니다. (구조 개선 / 중복 감소)
 // ==========================================
 const ProductCard = ({ product }: { product: ProductType }) => {
   const navigate = useNavigate();
 
   const handleProductClick = () => {
-    // 상품 구매 페이지로 넘어가면서 상품 ID를 파라미터로 넘김
     navigate(`/purchase/${product.id}`);
   };
 
@@ -68,15 +66,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         <p className="text-xs uppercase tracking-widest text-gray-400 mb-2">{product.badge}</p>
         <h3 className="text-lg font-medium text-gray-900 group-hover:text-blue-600 transition-colors">{product.name}</h3>
         <p className="text-md text-gray-900 mt-2 font-light">{product.price}</p>
-        
-        <button 
-          onClick={(e) => {
-            // 버튼 클릭 시에는 위로 이벤트가 전파되어 ProductCard 전체가 눌린 것으로 간주되는 걸 막거나 유지
-            // 여기서는 상품 전체가 clickable 하므로 버튼은 시각적 효과 부여용임
-            // 버튼 클릭 = 카드 클릭이 되도록 그대로 둔 상태
-          }}
-          className="mt-4 px-6 py-2 border border-gray-300 text-sm hover:bg-black hover:text-white transition-colors duration-300 w-full lg:w-auto"
-        >
+        <button className="mt-4 px-6 py-2 border border-gray-300 text-sm hover:bg-black hover:text-white transition-colors duration-300 w-full lg:w-auto">
           Buy Now
         </button>
       </div>
@@ -84,23 +74,29 @@ const ProductCard = ({ product }: { product: ProductType }) => {
   );
 };
 
-const ProductCatalog = () => {
-  const products: ProductType[] = [
-    { id: "p001", badge: "New", name: "단청 모티브 에코백", price: "45,000원", imgSrc: "/assets/images/product_eco_bag_1_1773383860413.png" },
-    { id: "p002", badge: "Bestseller", name: "한복 실루엣 에코백", price: "48,000원", imgSrc: "/assets/images/product_eco_bag_1_1773383860413.png" },
-    { id: "p003", badge: "Limited", name: "전통 자수 에코백", price: "52,000원", imgSrc: "/assets/images/product_eco_bag_1_1773383860413.png", filterClass: "filter grayscale-[20%]" },
-  ];
+// ==========================================
+// [의도] 범용적인 카탈로그 섹션 컴포넌트입니다.
+// 섹션별 ID(sectionId), 제목(title), 설명(description)과 데이터(products)를 동적으로 주입받아
+// 에코백 및 가죽 가방 섹션을 재사용성 있게 생성합니다.
+// ==========================================
+type CatalogSectionProps = {
+  sectionId: string;
+  title: string;
+  description: string;
+  products: ProductType[];
+  bgColor?: string;
+};
 
+const CatalogSection = ({ sectionId, title, description, products, bgColor = "bg-white" }: CatalogSectionProps) => {
   return (
-    <section id="products" className="py-24 bg-white pb-32">
+    <section id={sectionId} className={`py-24 pb-32 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-end justify-between mb-16">
           <div>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Unique Eco-bag</h2>
-            <p className="text-gray-500 mt-4 font-light">전통 모티브의 디테일과 현대적인 실용성을 겸비한 디자인 (상품을 클릭하여 구매 페이지로 이동하세요)</p>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">{title}</h2>
+            <p className="text-gray-500 mt-4 font-light">{description}</p>
           </div>
         </div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
           {products.map((p) => (
             <ProductCard key={p.id} product={p} />
@@ -158,13 +154,39 @@ const BrandStory = () => {
 };
 
 const Home = () => {
-    return (
-        <main>
-            <Hero />
-            <ProductCatalog />
-            <BrandStory />
-        </main>
-    );
+  // [의도] 제품 데이터를 각 카테고리별로 분리 정의하여 유지보수성 향상
+  const ecoBagData: ProductType[] = [
+    { id: "p001", badge: "New", name: "단청 모티브 에코백", price: "45,000원", imgSrc: "/assets/images/product_eco_bag_1_1773383860413.png" },
+    { id: "p002", badge: "Bestseller", name: "한복 실루엣 에코백", price: "48,000원", imgSrc: "/assets/images/product_eco_bag_1_1773383860413.png" },
+    { id: "p003", badge: "Limited", name: "전통 자수 에코백", price: "52,000원", imgSrc: "/assets/images/product_eco_bag_1_1773383860413.png", filterClass: "filter grayscale-[20%]" },
+  ];
+
+  const leatherBagData: ProductType[] = [
+    { id: "l001", badge: "Signature", name: "오브제 레더 크로스백", price: "185,000원", imgSrc: "/assets/images/brand_story_texture_1773383877086.png", filterClass: "filter contrast-125" },
+    { id: "l002", badge: "Upcoming", name: "소목장 텍스처 쇼퍼백", price: "240,000원", imgSrc: "/assets/images/brand_story_texture_1773383877086.png", filterClass: "filter grayscale-[50%]" },
+  ];
+
+  return (
+    <main>
+      <Hero />
+      <CatalogSection 
+        sectionId="products" 
+        title="Unique Eco-bag" 
+        description="전통 모티브의 디테일과 현대적인 실용성을 겸비한 디자인" 
+        products={ecoBagData} 
+      />
+      
+      {/* 2차 확장을 위해 새롭게 추가된 레더백 레이아웃 (배경색으로 카테고리 구분) */}
+      <CatalogSection 
+        sectionId="leather" 
+        title="Leather Bag" 
+        description="시간이 흐를수록 깊이를 더하는 프리미엄 가죽 라인업" 
+        products={leatherBagData} 
+        bgColor="bg-stone-50"
+      />
+      <BrandStory />
+    </main>
+  );
 };
 
 export default Home;
